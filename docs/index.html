@@ -239,13 +239,13 @@
                     <a href="#setup" class="toc-h2 toc-link" data-title="setup">Setup</a>
                   </li>
                   <li>
-                    <a href="#urls" class="toc-h2 toc-link" data-title="urls">URLs</a>
+                    <a href="#endpoint-urls" class="toc-h2 toc-link" data-title="endpoint-urls">Endpoint URLs</a>
                   </li>
                   <li>
                     <a href="#security" class="toc-h2 toc-link" data-title="security">Security</a>
                   </li>
                   <li>
-                    <a href="#interested-transactions" class="toc-h2 toc-link" data-title="interested-transactions">Interested Transactions</a>
+                    <a href="#transaction-whitelist" class="toc-h2 toc-link" data-title="transaction-whitelist">Transaction Whitelist</a>
                   </li>
                   <li>
                     <a href="#transaction-triggers" class="toc-h2 toc-link" data-title="transaction-triggers">Transaction Triggers</a>
@@ -306,81 +306,94 @@
 </tr>
 </thead><tbody>
 <tr>
-<td>Enpoints</td>
+<td>Endpoints</td>
 <td>Yes</td>
 <td>Your service endpoint that will accept the POST payload containing transactions.  Multiple endpoints supported.</td>
 </tr>
 <tr>
-<td>ApiKeys</td>
-<td>Yes</td>
-<td>Long-lived bearer token to authenticate with your service.  will be passed in the <code>Authorization</code> header.  Can be specified <em>per Endpoint</em>.</td>
+<td>Endpoint Type</td>
+<td>No</td>
+<td>Specifies type of environment (production, test, development, etc). Defaults to our service value (PlatformSync in <code>test</code> will default this value to <code>test</code>.)</td>
 </tr>
 <tr>
-<td>EndpointMetadata</td>
+<td>API Key(s)</td>
+<td>Yes</td>
+<td>Long-lived bearer token to authenticate with your service.  Should be specified <em>per Endpoint</em>.</td>
+</tr>
+<tr>
+<td>API Key Property</td>
+<td>Yes</td>
+<td>What key to use when sending the API key in the payload. Defaults to <code>Authorization</code></td>
+</tr>
+<tr>
+<td>API Key Placement</td>
+<td>Yes</td>
+<td>Where to place the API Key/Value pair.  Defaults to <code>header</code></td>
+</tr>
+<tr>
+<td>Endpoint Metadata</td>
 <td>No</td>
 <td>Additional payload to send.  Should be key-value pairs</td>
 </tr>
 <tr>
-<td>NotificationRecipients</td>
+<td>Notification Recipients</td>
 <td>No</td>
 <td>Email addresses to send notifications to</td>
 </tr>
 <tr>
-<td>ExpectedFormat</td>
+<td>Expected Format</td>
 <td>No</td>
 <td>Only JSON datatypes are supported at this time.</td>
 </tr>
 <tr>
-<td>TransactionWhitelist</td>
+<td>Transaction Whitelist</td>
 <td>No</td>
-<td>List of transactions that will be sent (See &quot;Interested Transactions&quot; below)</td>
+<td>List of transactions that will be sent (See &quot;Transaction Whitelist&quot; below)</td>
 </tr>
 <tr>
-<td>TransactionTriggers</td>
+<td>Transaction Triggers</td>
 <td>No</td>
 <td>List of transactions that will trigger sending other data.  See &quot;Transaction Triggers&quot; below for more information.</td>
 </tr>
 <tr>
-<td>MaxBatchSize</td>
+<td>Max Batc hSize</td>
 <td>No</td>
 <td>Maximum number of transactions to send at a time.  Defaults to 1000</td>
 </tr>
 <tr>
-<td>DefaultMessageTTL</td>
+<td>Default Message TTL</td>
 <td>No</td>
 <td>Exipration of messages. Defaults to 24 Hours</td>
 </tr>
 </tbody></table>
-<h2 id='urls'>URLs</h2>
+<h2 id='endpoint-urls'>Endpoint URLs</h2>
 <p>You must provide a minimum of one REST endpoint for your data to be posted to.  The transactions will be sent as an HTTP POST.  Please note that all transactions will be sent to all the URL endpoints that you specify</p>
 <h2 id='security'>Security</h2>
-<p>Security should be implemented as a long-lived, unique API token.  We do not yet support security via OAuth or username/password.</p>
+<p>Security should be implemented as a long-lived, unique API token.  We do not yet support security via OAuth, certificates or username/password.</p>
 
-<p>The token will be passed to your REST endpoint either in the body or as an <code>Authorization</code> header as a bearer token.</p>
-<h2 id='interested-transactions'>Interested Transactions</h2>
+<p>The token will be passed to your REST endpoint in the manner you specify (either in the body, query string, or header) with the property name you specify as well.</p>
+<h2 id='transaction-whitelist'>Transaction Whitelist</h2>
 <p>You may choose to receive any of the following types of transactions:</p>
 
 <ul>
-<li>End of Day</li>
-<li>End of Shift</li>
-<li>Validated Drop</li>
-<li>Change Purchase</li>
-<li>Servicing</li>
+<li>Validated Drop = 1</li>
+<li>Change Purchase = 2</li>
+<li>End of Day = 3</li>
+<li>End of Shift = 4</li>
+<li>Servicing = 5</li>
 </ul>
-
-<p>In addition, you may choose certain &quot;buffer&quot; points, where transactions are not sent to you until a certain type of transaction occurs.  For example, you may hold validated drops and servicings until an End of Day occurs, at which point all transactions that have not yet been sent will be sent along with the EOD transaction.</p>
 <h2 id='transaction-triggers'>Transaction Triggers</h2>
-<p>Coming soon... </p>
-<h2 id='payload'>Payload</h2><pre class="highlight json tab-json"><code><span class="w">    </span><span class="p">{</span><span class="w">
-        </span><span class="err">count</span><span class="p">:</span><span class="w"> </span><span class="mi">1000</span><span class="p">,</span><span class="w">
-        </span><span class="err">remaining</span><span class="p">:</span><span class="w"> </span><span class="mi">2322</span><span class="p">,</span><span class="w">
-        </span><span class="err">start</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
-        </span><span class="err">transactions</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-            </span><span class="p">{</span><span class="w"> </span><span class="err">/*</span><span class="w"> </span><span class="err">Transaction</span><span class="w"> </span><span class="err">object</span><span class="w"> </span><span class="err">*/</span><span class="w"> </span><span class="p">}</span><span class="w">
-        </span><span class="p">]</span><span class="w">
-    </span><span class="p">}</span><span class="w">
+<p>You may choose certain &quot;buffer&quot; points, where transactions are not sent to you until a certain type of transaction occurs.  For example, you may hold validated drops and servicings until an End of Day occurs, at which point all transactions that have not yet been sent will be sent along with the EOD transaction.</p>
+<h2 id='payload'>Payload</h2><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+    </span><span class="err">count</span><span class="p">:</span><span class="w"> </span><span class="mi">1000</span><span class="p">,</span><span class="w">
+    </span><span class="err">total</span><span class="p">:</span><span class="w"> </span><span class="mi">2322</span><span class="p">,</span><span class="w">
+    </span><span class="err">start</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+    </span><span class="err">transactions</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="p">{</span><span class="w"> </span><span class="err">/*</span><span class="w"> </span><span class="err">Transaction</span><span class="w"> </span><span class="err">object</span><span class="w"> </span><span class="err">*/</span><span class="w"> </span><span class="p">}</span><span class="w">
+    </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
 </span></code></pre>
-<p>We will POST transactionsThe transactions will come in JSON format, and will follow consistent patterns.</p>
+<p>We will send transactions as a POST. The transactions will come in JSON format, and will follow consistent patterns.</p>
 
 <p>You should supply us with a desired size (in transaction count) of your payload.  We will default to 1,000 transactions at a time.</p>
 <h2 id='failure-notifications'>Failure Notifications</h2>
