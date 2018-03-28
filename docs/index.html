@@ -251,9 +251,6 @@
                     <a href="#transaction-triggers" class="toc-h2 toc-link" data-title="transaction-triggers">Transaction Triggers</a>
                   </li>
                   <li>
-                    <a href="#payload" class="toc-h2 toc-link" data-title="payload">Payload</a>
-                  </li>
-                  <li>
                     <a href="#failure-notifications" class="toc-h2 toc-link" data-title="failure-notifications">Failure Notifications</a>
                   </li>
                   <li>
@@ -261,6 +258,28 @@
                   </li>
                   <li>
                     <a href="#caveats" class="toc-h2 toc-link" data-title="caveats">Caveats</a>
+                  </li>
+              </ul>
+          </li>
+          <li>
+            <a href="#objects" class="toc-h1 toc-link" data-title="objects">Objects</a>
+              <ul class="toc-list-h2">
+                  <li>
+                    <a href="#request-objects" class="toc-h2 toc-link" data-title="request-objects">Request Objects</a>
+                  </li>
+                  <li>
+                    <a href="#response-objects" class="toc-h2 toc-link" data-title="response-objects">Response Objects</a>
+                  </li>
+              </ul>
+          </li>
+          <li>
+            <a href="#transactions" class="toc-h1 toc-link" data-title="transactions">Transactions</a>
+              <ul class="toc-list-h2">
+                  <li>
+                    <a href="#request-for-transactions" class="toc-h2 toc-link" data-title="request-for-transactions">Request for Transactions</a>
+                  </li>
+                  <li>
+                    <a href="#response-for-transactions" class="toc-h2 toc-link" data-title="response-for-transactions">Response for Transactions</a>
                   </li>
               </ul>
           </li>
@@ -286,7 +305,7 @@
 <h2 id='platformsync-push-api'>PlatformSync Push API</h2>
 <p>As its name implies, the Push API will push data into your API via REST endpoints provided by you.  This will enable near-real-time transactional data.</p>
 <h2 id='platformsync-pull-api'>PlatformSync Pull API</h2>
-<p>The Pull API will enable you to connect to our API REST service to query for transactional data.  You will also use this service to get data that was missed from the Push Service</p>
+<p>The Pull API will enable you to connect to our API REST service to query for transactional data.  In the event of a failure, you can also use this service to get data that was missed from the Push API.</p>
 <h2 id='missing-data'>Missing Data</h2>
 <p>There may be instances where you would expect data to be coming to you, but it is not there.  In <em>most</em> cases, this is due to a data quality alert that halts processing until someone can take action on the alert.  </p>
 
@@ -338,7 +357,7 @@
 <tr>
 <td>Notification Recipients</td>
 <td>No</td>
-<td>Email addresses to send notifications to</td>
+<td>Email addresses to send notifications to in the event of a failure</td>
 </tr>
 <tr>
 <td>Expected Format</td>
@@ -356,7 +375,7 @@
 <td>List of transactions that will trigger sending other data.  See &quot;Transaction Triggers&quot; below for more information.</td>
 </tr>
 <tr>
-<td>Max Batc hSize</td>
+<td>Max Batch Size</td>
 <td>No</td>
 <td>Maximum number of transactions to send at a time.  Defaults to 1000</td>
 </tr>
@@ -373,35 +392,178 @@
 
 <p>The token will be passed to your REST endpoint in the manner you specify (either in the body, query string, or header) with the property name you specify as well.</p>
 <h2 id='transaction-whitelist'>Transaction Whitelist</h2>
-<p>You may choose to receive any of the following types of transactions:</p>
+<p>You may choose to receive any combination of the following types of transactions:</p>
 
 <ul>
 <li>Validated Drop = 1</li>
-<li>Change Purchase = 2</li>
-<li>End of Day = 3</li>
-<li>End of Shift = 4</li>
-<li>Servicing = 5</li>
+<li>Manual Drop = 2</li>
+<li>Change Purchase = 3</li>
+<li>End of Day = 4</li>
+<li>End of Shift = 5</li>
+<li>Servicing = 6</li>
 </ul>
 <h2 id='transaction-triggers'>Transaction Triggers</h2>
-<p>You may choose certain &quot;buffer&quot; points, where transactions are not sent to you until a certain type of transaction occurs.  For example, you may hold validated drops and servicings until an End of Day occurs, at which point all transactions that have not yet been sent will be sent along with the EOD transaction.</p>
-<h2 id='payload'>Payload</h2><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
-    </span><span class="err">count</span><span class="p">:</span><span class="w"> </span><span class="mi">1000</span><span class="p">,</span><span class="w">
-    </span><span class="err">total</span><span class="p">:</span><span class="w"> </span><span class="mi">2322</span><span class="p">,</span><span class="w">
-    </span><span class="err">start</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
-    </span><span class="err">transactions</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-        </span><span class="p">{</span><span class="w"> </span><span class="err">/*</span><span class="w"> </span><span class="err">Transaction</span><span class="w"> </span><span class="err">object</span><span class="w"> </span><span class="err">*/</span><span class="w"> </span><span class="p">}</span><span class="w">
-    </span><span class="p">]</span><span class="w">
-</span><span class="p">}</span><span class="w">
-</span></code></pre>
-<p>We will send transactions as a POST. The transactions will come in JSON format, and will follow consistent patterns.</p>
-
-<p>You should supply us with a desired size (in transaction count) of your payload.  We will default to 1,000 transactions at a time.</p>
+<p>You may choose certain &quot;buffer&quot; points, where transactions are not sent to you until a certain type of transaction occurs.  For example, you may hold validated drops and servicings until an End of Day (EOD) occurs, at which point all transactions that have not yet been sent will be sent along with the EOD transaction.</p>
 <h2 id='failure-notifications'>Failure Notifications</h2>
 <p>If we are unable to deliever your data after a predefined number of retries, we will notifiy the defined email addresses of the failure.  It will then be your responsiblity to get these failed transactions from the Pull API.</p>
 <h2 id='message-expiration'>Message Expiration</h2>
-<p>We will attempt to deliver your data on an interval for a period of 24 hours.</p>
+<p>We will attempt to deliver your data on an interval for a period of 24 hours (or whatever your defined TTL is).</p>
 <h2 id='caveats'>Caveats</h2>
 <p>In the event of a failure, we will do our best to deliver recovered transactions in the same order in which they occured. However, your system should be resilient enough to handle out-of-order transactions.</p>
+<h1 id='objects'>Objects</h1><h2 id='request-objects'>Request Objects</h2><h3 id='push-api-request-objects'>Push API Request Objects</h3>
+<p>There are no publically exposed endpoints for the Push API, and therefore no request object definitions.  </p>
+<h3 id='pull-api-request-objects'>Pull API Request Objects</h3>
+<p>The implementation of the Pull API is still pending.  This documentation will be update when that API is defined.</p>
+<h2 id='response-objects'>Response Objects</h2>
+<p>The Push and Pull APIs will share object definitions (while we are aware that the payload we send in the Push API is not technically a &quot;response&quot;).</p>
+
+<p>Properties with <code>null</code> values will be excluded from the payload.</p>
+<h1 id='transactions'>Transactions</h1><h2 id='request-for-transactions'>Request for Transactions</h2>
+<p>The Pull API for requesting transactions has not yet been defined.</p>
+<h2 id='response-for-transactions'>Response for Transactions</h2><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+    </span><span class="s2">"Total"</span><span class="p">:</span><span class="w"> </span><span class="mi">5434</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"Page"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"PageSize"</span><span class="p">:</span><span class="w"> </span><span class="mi">1000</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"Transactions"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"SerialNumber"</span><span class="p">:</span><span class="w"> </span><span class="s2">"UT01234"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"RetrievedOn"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-05-01T13:24:00.000000"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"TransactionDateTime"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-05-01T13:20:00.000000"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"UserName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ROSE"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"TransactionType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"CashTransaction"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"Amount"</span><span class="p">:</span><span class="w"> </span><span class="mi">240</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"Denominations"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+                </span><span class="p">{</span><span class="w">
+                    </span><span class="s2">"UnitValue"</span><span class="p">:</span><span class="w"> </span><span class="mi">20</span><span class="p">,</span><span class="w">
+                    </span><span class="s2">"Count"</span><span class="p">:</span><span class="w"> </span><span class="mi">8</span><span class="p">,</span><span class="w">
+                    </span><span class="s2">"Currency"</span><span class="p">:</span><span class="w"> </span><span class="s2">"USD"</span><span class="w">
+                </span><span class="p">},</span><span class="w">
+                </span><span class="p">{</span><span class="w">
+                    </span><span class="s2">"UnitValue"</span><span class="p">:</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span><span class="w">
+                    </span><span class="s2">"Count"</span><span class="p">:</span><span class="w"> </span><span class="mi">12</span><span class="p">,</span><span class="w">
+                    </span><span class="s2">"Currency"</span><span class="p">:</span><span class="w"> </span><span class="s2">"USD"</span><span class="w">
+                </span><span class="p">},</span><span class="w">
+                </span><span class="p">{</span><span class="w">
+                    </span><span class="s2">"UnitValue"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+                    </span><span class="s2">"Count"</span><span class="p">:</span><span class="w"> </span><span class="mi">20</span><span class="p">,</span><span class="w">
+                    </span><span class="s2">"Currency"</span><span class="p">:</span><span class="w"> </span><span class="s2">"USD"</span><span class="w">
+                </span><span class="p">}</span><span class="w">
+            </span><span class="p">],</span><span class="w">
+            </span><span class="s2">"Register"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Register 1"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"ChangePurchaseNumber"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ASD1234"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"DepositReferenceNumber"</span><span class="p">:</span><span class="w"> </span><span class="s2">"JGH2345"</span><span class="p">,</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+    </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<p><strong>Response Properties</strong></p>
+
+<table><thead>
+<tr>
+<th>Property Name</th>
+<th>More Information</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>Total</td>
+<td>Total number of transactions included in this (and possibly subsequent) page(s)</td>
+</tr>
+<tr>
+<td>Page</td>
+<td>The current page (zero-based index)</td>
+</tr>
+<tr>
+<td>PageSize</td>
+<td>The number of transaction included in this page (for the Push API, corresponds to the <code>MaxBatchSize</code> definition)</td>
+</tr>
+<tr>
+<td>Transactions</td>
+<td>Transaction Object list</td>
+</tr>
+</tbody></table>
+
+<p><strong>Transaction Object</strong></p>
+
+<table><thead>
+<tr>
+<th>Property Name</th>
+<th>More Information</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>SerialNumber</td>
+<td>Serial number of the safe that the transaction occured on</td>
+</tr>
+<tr>
+<td>RetrievedOn</td>
+<td>Datetime of when the transaction was retrieved from the safe (In CST/CDT)</td>
+</tr>
+<tr>
+<td>TransactionDateTime</td>
+<td>Datetime of when the transaction occured on the safe (In local time)</td>
+</tr>
+<tr>
+<td>UserName</td>
+<td>Logged in user that performed the transaction</td>
+</tr>
+<tr>
+<td>TransactionType</td>
+<td>Type of transaction performed.  Will be one of <code>TransactionType</code>&#39;s outlined below.</td>
+</tr>
+<tr>
+<td>Amount</td>
+<td>Total cash value of the transaction</td>
+</tr>
+<tr>
+<td>Denominations</td>
+<td>If the transaction was a validated drop, it will contain a list of bills.  For more information, see &quot;Denomination Object&quot; table below.</td>
+</tr>
+<tr>
+<td>Register</td>
+<td>Which register, if any, that was used for the transaction</td>
+</tr>
+<tr>
+<td>ChangePurchaseNumber</td>
+<td>Change purchase number, if any, that was used for the transaction</td>
+</tr>
+<tr>
+<td>DepositReferenceNumber</td>
+<td>Deposit Reference Number, if any, that was used for the transaction</td>
+</tr>
+</tbody></table>
+
+<p><strong>Transaction Types</strong></p>
+
+<ul>
+<li>Validated Drop = 1</li>
+<li>Manual Drop = 2</li>
+<li>Change Purchase = 3</li>
+<li>End of Day = 4</li>
+<li>End of Shift = 5</li>
+<li>Servicing = 6</li>
+</ul>
+
+<p><strong>Denomination Object</strong></p>
+
+<table><thead>
+<tr>
+<th>Property Name</th>
+<th>More Information</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>UnitValue</td>
+<td>Value of each bill</td>
+</tr>
+<tr>
+<td>Count</td>
+<td>Number of bills</td>
+</tr>
+<tr>
+<td>Currency</td>
+<td>Currency of the bill</td>
+</tr>
+</tbody></table>
 
       </div>
       <div class="dark-box">
