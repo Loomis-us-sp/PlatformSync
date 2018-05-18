@@ -242,6 +242,9 @@
                     <a href="#endpoint-urls" class="toc-h2 toc-link" data-title="endpoint-urls">Endpoint URLs</a>
                   </li>
                   <li>
+                    <a href="#capacity-planning" class="toc-h2 toc-link" data-title="capacity-planning">Capacity Planning</a>
+                  </li>
+                  <li>
                     <a href="#security" class="toc-h2 toc-link" data-title="security">Security</a>
                   </li>
                   <li>
@@ -366,6 +369,10 @@
 <p>You must provide a minimum of one <em>public</em> endpoint for your data to be sent to. The transactions will be sent as an HTTP POST.  Please note that a copy of all transactions will be sent to all the endpoints that you provide.</p>
 
 <p>Also note that the endpoint must be accessible to the internet without any VPN connection.</p>
+<h2 id='capacity-planning'>Capacity Planning</h2>
+<p>There may be instances where we are POSTing a large volume of transactions at one time. Your service should be able to handle these bursts of high load.  This can be mitigated by specifying a smaller batch size. However, this will result in more messages.</p>
+
+<p>Loomis will work with you during the setup phase to provide an estimate of the expected load.</p>
 <h2 id='security'>Security</h2>
 <p>Security should be implemented as a long-lived, unique API token.  We do not support security via OAuth, certificates or username/password.</p>
 
@@ -376,47 +383,47 @@
 <p>You may choose to receive any combination of the following types of transactions:</p>
 
 <ul>
-<li>ValidatedCashIn = 30
+<li>ValidatedCashIn
 
 <ul>
 <li>Cashin performed by the note validator on the safe</li>
 </ul></li>
-<li>Servicing = 31
+<li>Servicing
 
 <ul>
 <li>A pickup by a Loomis courier</li>
 </ul></li>
-<li>ChangePurchase = 32
+<li>ChangePurchase
 
 <ul>
 <li>A request for an amount of change to be delivered and paid for out of the validated cash already dropped</li>
 </ul></li>
-<li>ManualCashTransaction = 51
+<li>ManualCashTransaction
 
 <ul>
 <li>A manual, non-validated drop</li>
 </ul></li>
-<li>CoinDispense = 90
+<li>CoinDispense
 
 <ul>
 <li>Coins that were dispensed</li>
 </ul></li>
-<li>NoteDispense = 91
+<li>NoteDispense
 
 <ul>
 <li>Notes that were dispensed</li>
 </ul></li>
-<li>TubeRemoved = 92
+<li>TubeRemoved 
 
 <ul>
 <li>Tube removed from safe</li>
 </ul></li>
-<li>TubeLoaded = 93
+<li>TubeLoaded
 
 <ul>
 <li>Tube loaded into safe</li>
 </ul></li>
-<li>EndOfDay = 100
+<li>EndOfDay
 
 <ul>
 <li>End of the accounting period on the safe</li>
@@ -439,7 +446,7 @@
             </span><span class="s2">"RetrievedOn"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-05-11T17:29:32.4668424-05:00"</span><span class="p">,</span><span class="w">
             </span><span class="s2">"TransactionDateTime"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-05-10T17:39:57.5717919"</span><span class="p">,</span><span class="w">
             </span><span class="s2">"UserName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1UAUOVPITN4"</span><span class="p">,</span><span class="w">
-            </span><span class="s2">"TransactionType"</span><span class="p">:</span><span class="w"> </span><span class="mi">30</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"TransactionType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ValidatedCashIn"</span><span class="p">,</span><span class="w">
             </span><span class="s2">"Amount"</span><span class="p">:</span><span class="w"> </span><span class="mf">2203.0</span><span class="p">,</span><span class="w">
             </span><span class="s2">"Denominations"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
                 </span><span class="p">{</span><span class="w">
@@ -542,15 +549,15 @@
 <p><strong>Transaction Types</strong></p>
 
 <ul>
-<li>ValidatedCashIn = 30</li>
-<li>Servicing = 31</li>
-<li>ChangePurchase = 32</li>
-<li>ManualCashTransaction = 51</li>
-<li>CoinDispense = 90</li>
-<li>NoteDispense = 91</li>
-<li>TubeRemoved = 92</li>
-<li>TubeLoaded = 93</li>
-<li>EndOfDay = 100</li>
+<li>ValidatedCashIn</li>
+<li>Servicing</li>
+<li>ChangePurchase</li>
+<li>ManualCashTransaction</li>
+<li>CoinDispense</li>
+<li>NoteDispense</li>
+<li>TubeRemoved</li>
+<li>TubeLoaded</li>
+<li>EndOfDay</li>
 </ul>
 
 <p><strong>Denomination Object</strong></p>
