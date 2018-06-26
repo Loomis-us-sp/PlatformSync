@@ -35,7 +35,7 @@ With Loomis PlatformSync, customers can offer end points for direct integration 
 
 Below is a high level representation of how Loomis PlatformSync can integrate with customer back-end systems.
 
-![overview](docs/images/overview.PNG)
+![overview](images/overview.png)
 
 ## Serial Number
 As messages are exchanged between the Loomis PlatformSync and customer endpoints, accurately identifying individual safes on both ends will be crucial. The most natural mechanism for this is the unique alphanumeric serial number assigned to the safe by the manufacturer. The serial number varies in format length by manufacturer and model. 
