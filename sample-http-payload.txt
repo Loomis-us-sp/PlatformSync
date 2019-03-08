@@ -1,0 +1,79 @@
+POST http://example.com/api
+
+Connection: Keep-Alive
+Content-Length: 1398
+Content-Type: application/json
+Authorization: k7j7Si8n7rRcGu6vwWYtg6MBo0CgYEQG
+Expect: 100-continue
+Host: example.com
+
+{
+    "Metadata": {
+        "MessageId": "4d1f5a93-0d87-4a2d-9f02-c6f662bee2e6",
+        "CorrelationId": "e3f5fc49-93e9-4cff-b78e-a70a1260879f"
+    },
+    "Transactions": [
+        {
+            "PickupGroupId": 61499281,
+            "SerialNumber": "UT07761",
+            "RetrievedOn": "2018-12-07T08:26:37.437-06:00",
+            "TransactionDateTime": "2018-12-07T11:54:27-06:00",
+            "UserName": "JOSE CHAVEZ",
+            "TransactionType": "CashIn",
+            "Amount": 5560.0,
+            "Denominations": [
+                {
+                    "UnitValue": 20.0000,
+                    "Count": 53,
+                    "Currency": "USD"
+                },
+                {
+                    "UnitValue": 100.0000,
+                    "Count": 45,
+                    "Currency": "USD"
+                }
+            ],
+            "Register": "0",
+            "ChangePurchaseNumber": null,
+            "DepositReferenceNumber": null
+        },
+        {
+            "PickupGroupId": 61499281,
+            "SerialNumber": "UT07761",
+            "RetrievedOn": "2018-12-07T08:26:38.497-06:00",
+            "TransactionDateTime": "2018-12-07T11:56:25-06:00",
+            "UserName": "JOSE CHAVEZ",
+            "TransactionType": "CashIn",
+            "Amount": 2020.0,
+            "Denominations": [
+                {
+                    "UnitValue": 20.0000,
+                    "Count": 101,
+                    "Currency": "USD"
+                }
+            ],
+            "Register": "0",
+            "ChangePurchaseNumber": null,
+            "DepositReferenceNumber": null
+        },
+        {
+            "PickupGroupId": 61499281,
+            "SerialNumber": "UT07761",
+            "RetrievedOn": "2018-12-07T08:26:39.757-06:00",
+            "TransactionDateTime": "2018-12-07T11:56:48-06:00",
+            "UserName": "JOSE CHAVEZ",
+            "TransactionType": "CashIn",
+            "Amount": 260.0,
+            "Denominations": [
+                {
+                    "UnitValue": 20.0000,
+                    "Count": 13,
+                    "Currency": "USD"
+                }
+            ],
+            "Register": "0",
+            "ChangePurchaseNumber": null,
+            "DepositReferenceNumber": null
+        }
+    ]
+}
