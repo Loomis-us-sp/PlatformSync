@@ -450,44 +450,124 @@
 <p>We will deliver the transactions ordered by date in which they occurred on the safe. We will make every attempt to deliver the transactions in the order in which they are processed by our system. However, occasionally, in the even of a failure, these messages may come in out of order. Your service should take this into account when accepting transactions.</p>
 <h1 id='ftp-file-delivery'>FTP File Delivery</h1>
 <p>For additional details on setting up FTP delivery, please contact our team at LoomisSafePointSupport@us.loomis.com.</p>
-<h2 id='example-xml-format'>Example XML Format</h2><pre class="highlight json tab-json"><code><span class="err">No</span><span class="w"> </span><span class="err">JSON</span><span class="w"> </span><span class="err">File</span><span class="w"> </span><span class="err">delivery</span><span class="w"> </span><span class="err">is</span><span class="w"> </span><span class="err">possible</span><span class="w">
+<h2 id='example-xml-format'>Example XML Format</h2><pre class="highlight json tab-json"><code><span class="err">No</span><span class="w"> </span><span class="err">JSON</span><span class="w"> </span><span class="err">File</span><span class="w"> </span><span class="err">delivery</span><span class="w"> </span><span class="err">is</span><span class="w"> </span><span class="err">possible</span><span class="w"> </span><span class="err">at</span><span class="w"> </span><span class="err">this</span><span class="w"> </span><span class="err">time.</span><span class="w">
 </span></code></pre><pre class="highlight xml tab-xml"><code><span class="cp">&lt;?xml version="1.0" encoding="utf-8"?&gt;</span>
 <span class="nt">&lt;Messages&gt;</span>
     <span class="nt">&lt;Message&gt;</span>
         <span class="nt">&lt;Transactions&gt;</span>
             <span class="nt">&lt;CustomerTransaction&gt;</span>
-                <span class="nt">&lt;PickupGroupId&gt;</span>0<span class="nt">&lt;/PickupGroupId&gt;</span>
-                <span class="nt">&lt;SerialNumber&gt;</span>SN12345<span class="nt">&lt;/SerialNumber&gt;</span>
-                <span class="nt">&lt;RetrievedOn&gt;</span>2019-09-12T14:11:20.3870000Z<span class="nt">&lt;/RetrievedOn&gt;</span>
-                <span class="nt">&lt;TransactionDateTime&gt;</span>2019-09-12T09:47:57<span class="nt">&lt;/TransactionDateTime&gt;</span>
-                <span class="nt">&lt;UserName&gt;</span>USER_1<span class="nt">&lt;/UserName&gt;</span>
-                <span class="nt">&lt;TransactionType&gt;</span>DoorOpened<span class="nt">&lt;/TransactionType&gt;</span>
-                <span class="nt">&lt;Amount&gt;</span>0<span class="nt">&lt;/Amount&gt;</span>
-                <span class="nt">&lt;DoorName&gt;</span>Storage vault open<span class="nt">&lt;/DoorName&gt;</span>
-            <span class="nt">&lt;/CustomerTransaction&gt;</span>
-            <span class="nt">&lt;CustomerTransaction&gt;</span>
-                <span class="nt">&lt;PickupGroupId&gt;</span>0<span class="nt">&lt;/PickupGroupId&gt;</span>
-                <span class="nt">&lt;SerialNumber&gt;</span>SN12345<span class="nt">&lt;/SerialNumber&gt;</span>
-                <span class="nt">&lt;RetrievedOn&gt;</span>2019-09-12T14:11:20.3870000Z<span class="nt">&lt;/RetrievedOn&gt;</span>
-                <span class="nt">&lt;TransactionDateTime&gt;</span>2019-09-12T09:48:00<span class="nt">&lt;/TransactionDateTime&gt;</span>
-                <span class="nt">&lt;UserName&gt;</span>USER_1<span class="nt">&lt;/UserName&gt;</span>
-                <span class="nt">&lt;TransactionType&gt;</span>DoorClosed<span class="nt">&lt;/TransactionType&gt;</span>
-                <span class="nt">&lt;Amount&gt;</span>0<span class="nt">&lt;/Amount&gt;</span>
-                <span class="nt">&lt;DoorName&gt;</span>Storage vault close<span class="nt">&lt;/DoorName&gt;</span>
+                <span class="nt">&lt;PickupGroupId&gt;</span>100122023<span class="nt">&lt;/PickupGroupId&gt;</span>
+                <span class="nt">&lt;SerialNumber&gt;</span>UH12345<span class="nt">&lt;/SerialNumber&gt;</span>
+                <span class="nt">&lt;RetrievedOn&gt;</span>2019-09-26T08:01:11.4030000Z<span class="nt">&lt;/RetrievedOn&gt;</span>
+                <span class="nt">&lt;TransactionDateTime&gt;</span>2019-09-26T00:01:00<span class="nt">&lt;/TransactionDateTime&gt;</span>
+                <span class="nt">&lt;UserName&gt;</span>AUTOEOD<span class="nt">&lt;/UserName&gt;</span>
+                <span class="nt">&lt;TransactionType&gt;</span>EndOfDay<span class="nt">&lt;/TransactionType&gt;</span>
+                <span class="nt">&lt;Amount&gt;</span>0.0000<span class="nt">&lt;/Amount&gt;</span>
+                <span class="nt">&lt;Denominations</span> <span class="nt">/&gt;</span>
             <span class="nt">&lt;/CustomerTransaction&gt;</span>
         <span class="nt">&lt;/Transactions&gt;</span>
     <span class="nt">&lt;/Message&gt;</span>
     <span class="nt">&lt;Message&gt;</span>
         <span class="nt">&lt;Transactions&gt;</span>
             <span class="nt">&lt;CustomerTransaction&gt;</span>
-                <span class="nt">&lt;PickupGroupId&gt;</span>12345678<span class="nt">&lt;/PickupGroupId&gt;</span>
-                <span class="nt">&lt;SerialNumber&gt;</span>SN12345<span class="nt">&lt;/SerialNumber&gt;</span>
-                <span class="nt">&lt;RetrievedOn&gt;</span>2019-09-12T14:06:06.2470000Z<span class="nt">&lt;/RetrievedOn&gt;</span>
-                <span class="nt">&lt;TransactionDateTime&gt;</span>2019-09-12T04:00:00<span class="nt">&lt;/TransactionDateTime&gt;</span>
+                <span class="nt">&lt;PickupGroupId&gt;</span>99616209<span class="nt">&lt;/PickupGroupId&gt;</span>
+                <span class="nt">&lt;SerialNumber&gt;</span>UH12345<span class="nt">&lt;/SerialNumber&gt;</span>
+                <span class="nt">&lt;RetrievedOn&gt;</span>2019-09-26T08:02:01.2600000Z<span class="nt">&lt;/RetrievedOn&gt;</span>
+                <span class="nt">&lt;TransactionDateTime&gt;</span>2019-09-26T01:23:19<span class="nt">&lt;/TransactionDateTime&gt;</span>
+                <span class="nt">&lt;UserName&gt;</span>USER_1<span class="nt">&lt;/UserName&gt;</span>
+                <span class="nt">&lt;TransactionType&gt;</span>TubeRemoved<span class="nt">&lt;/TransactionType&gt;</span>
+                <span class="nt">&lt;Amount&gt;</span>60.0000<span class="nt">&lt;/Amount&gt;</span>
+                <span class="nt">&lt;Denominations</span> <span class="nt">/&gt;</span>
+                <span class="nt">&lt;Register&gt;</span>0<span class="nt">&lt;/Register&gt;</span>
+                <span class="nt">&lt;TubeCount&gt;</span>1<span class="nt">&lt;/TubeCount&gt;</span>
+                <span class="nt">&lt;TubeColumn&gt;</span>7<span class="nt">&lt;/TubeColumn&gt;</span>
+            <span class="nt">&lt;/CustomerTransaction&gt;</span>
+        <span class="nt">&lt;/Transactions&gt;</span>
+    <span class="nt">&lt;/Message&gt;</span>
+    <span class="nt">&lt;Message&gt;</span>
+        <span class="nt">&lt;Transactions&gt;</span>
+            <span class="nt">&lt;CustomerTransaction&gt;</span>
+                <span class="nt">&lt;PickupGroupId&gt;</span>100121517<span class="nt">&lt;/PickupGroupId&gt;</span>
+                <span class="nt">&lt;SerialNumber&gt;</span>UH12345<span class="nt">&lt;/SerialNumber&gt;</span>
+                <span class="nt">&lt;RetrievedOn&gt;</span>2019-09-26T08:00:51.0730000Z<span class="nt">&lt;/RetrievedOn&gt;</span>
+                <span class="nt">&lt;TransactionDateTime&gt;</span>2019-09-26T00:01:00<span class="nt">&lt;/TransactionDateTime&gt;</span>
                 <span class="nt">&lt;UserName&gt;</span>AUTOEOD<span class="nt">&lt;/UserName&gt;</span>
                 <span class="nt">&lt;TransactionType&gt;</span>EndOfDay<span class="nt">&lt;/TransactionType&gt;</span>
                 <span class="nt">&lt;Amount&gt;</span>0.0000<span class="nt">&lt;/Amount&gt;</span>
                 <span class="nt">&lt;Denominations</span> <span class="nt">/&gt;</span>
+            <span class="nt">&lt;/CustomerTransaction&gt;</span>
+            <span class="nt">&lt;CustomerTransaction&gt;</span>
+                <span class="nt">&lt;PickupGroupId&gt;</span>100121517<span class="nt">&lt;/PickupGroupId&gt;</span>
+                <span class="nt">&lt;SerialNumber&gt;</span>UH12345<span class="nt">&lt;/SerialNumber&gt;</span>
+                <span class="nt">&lt;RetrievedOn&gt;</span>2019-09-26T08:00:51.0730000Z<span class="nt">&lt;/RetrievedOn&gt;</span>
+                <span class="nt">&lt;TransactionDateTime&gt;</span>2019-09-26T00:19:24<span class="nt">&lt;/TransactionDateTime&gt;</span>
+                <span class="nt">&lt;UserName&gt;</span>USER_2<span class="nt">&lt;/UserName&gt;</span>
+                <span class="nt">&lt;TransactionType&gt;</span>CashIn<span class="nt">&lt;/TransactionType&gt;</span>
+                <span class="nt">&lt;Amount&gt;</span>180.0000<span class="nt">&lt;/Amount&gt;</span>
+                <span class="nt">&lt;Denominations&gt;</span>
+                    <span class="nt">&lt;DenominationValue&gt;</span>
+                        <span class="nt">&lt;UnitValue&gt;</span>20.0000<span class="nt">&lt;/UnitValue&gt;</span>
+                        <span class="nt">&lt;Count&gt;</span>9<span class="nt">&lt;/Count&gt;</span>
+                        <span class="nt">&lt;Currency&gt;</span>USD<span class="nt">&lt;/Currency&gt;</span>
+                    <span class="nt">&lt;/DenominationValue&gt;</span>
+                <span class="nt">&lt;/Denominations&gt;</span>
+                <span class="nt">&lt;Register&gt;</span>0<span class="nt">&lt;/Register&gt;</span>
+            <span class="nt">&lt;/CustomerTransaction&gt;</span>
+            <span class="nt">&lt;CustomerTransaction&gt;</span>
+                <span class="nt">&lt;PickupGroupId&gt;</span>100121517<span class="nt">&lt;/PickupGroupId&gt;</span>
+                <span class="nt">&lt;SerialNumber&gt;</span>UH12345<span class="nt">&lt;/SerialNumber&gt;</span>
+                <span class="nt">&lt;RetrievedOn&gt;</span>2019-09-26T08:00:51.0730000Z<span class="nt">&lt;/RetrievedOn&gt;</span>
+                <span class="nt">&lt;TransactionDateTime&gt;</span>2019-09-26T00:22:47<span class="nt">&lt;/TransactionDateTime&gt;</span>
+                <span class="nt">&lt;UserName&gt;</span>USER_2<span class="nt">&lt;/UserName&gt;</span>
+                <span class="nt">&lt;TransactionType&gt;</span>TubeRemoved<span class="nt">&lt;/TransactionType&gt;</span>
+                <span class="nt">&lt;Amount&gt;</span>60.0000<span class="nt">&lt;/Amount&gt;</span>
+                <span class="nt">&lt;Denominations</span> <span class="nt">/&gt;</span>
+                <span class="nt">&lt;Register&gt;</span>0<span class="nt">&lt;/Register&gt;</span>
+                <span class="nt">&lt;TubeCount&gt;</span>1<span class="nt">&lt;/TubeCount&gt;</span>
+                <span class="nt">&lt;TubeColumn&gt;</span>7<span class="nt">&lt;/TubeColumn&gt;</span>
+            <span class="nt">&lt;/CustomerTransaction&gt;</span>
+            <span class="nt">&lt;CustomerTransaction&gt;</span>
+                <span class="nt">&lt;PickupGroupId&gt;</span>100121517<span class="nt">&lt;/PickupGroupId&gt;</span>
+                <span class="nt">&lt;SerialNumber&gt;</span>UH12345<span class="nt">&lt;/SerialNumber&gt;</span>
+                <span class="nt">&lt;RetrievedOn&gt;</span>2019-09-26T08:00:51.0730000Z<span class="nt">&lt;/RetrievedOn&gt;</span>
+                <span class="nt">&lt;TransactionDateTime&gt;</span>2019-09-26T00:23:03<span class="nt">&lt;/TransactionDateTime&gt;</span>
+                <span class="nt">&lt;UserName&gt;</span>USER_2<span class="nt">&lt;/UserName&gt;</span>
+                <span class="nt">&lt;TransactionType&gt;</span>CashIn<span class="nt">&lt;/TransactionType&gt;</span>
+                <span class="nt">&lt;Amount&gt;</span>100.0000<span class="nt">&lt;/Amount&gt;</span>
+                <span class="nt">&lt;Denominations&gt;</span>
+                    <span class="nt">&lt;DenominationValue&gt;</span>
+                        <span class="nt">&lt;UnitValue&gt;</span>100.0000<span class="nt">&lt;/UnitValue&gt;</span>
+                        <span class="nt">&lt;Count&gt;</span>1<span class="nt">&lt;/Count&gt;</span>
+                        <span class="nt">&lt;Currency&gt;</span>USD<span class="nt">&lt;/Currency&gt;</span>
+                    <span class="nt">&lt;/DenominationValue&gt;</span>
+                <span class="nt">&lt;/Denominations&gt;</span>
+                <span class="nt">&lt;Register&gt;</span>0<span class="nt">&lt;/Register&gt;</span>
+            <span class="nt">&lt;/CustomerTransaction&gt;</span>
+        <span class="nt">&lt;/Transactions&gt;</span>
+    <span class="nt">&lt;/Message&gt;</span>
+    <span class="nt">&lt;Message&gt;</span>
+        <span class="nt">&lt;Transactions&gt;</span>
+            <span class="nt">&lt;CustomerTransaction&gt;</span>
+                <span class="nt">&lt;PickupGroupId&gt;</span>99673837<span class="nt">&lt;/PickupGroupId&gt;</span>
+                <span class="nt">&lt;SerialNumber&gt;</span>UH12345<span class="nt">&lt;/SerialNumber&gt;</span>
+                <span class="nt">&lt;RetrievedOn&gt;</span>2019-09-26T08:01:47.0430000Z<span class="nt">&lt;/RetrievedOn&gt;</span>
+                <span class="nt">&lt;TransactionDateTime&gt;</span>2019-09-26T01:22:47<span class="nt">&lt;/TransactionDateTime&gt;</span>
+                <span class="nt">&lt;UserName&gt;</span>USER_3<span class="nt">&lt;/UserName&gt;</span>
+                <span class="nt">&lt;TransactionType&gt;</span>CashIn<span class="nt">&lt;/TransactionType&gt;</span>
+                <span class="nt">&lt;Amount&gt;</span>260.0000<span class="nt">&lt;/Amount&gt;</span>
+                <span class="nt">&lt;Denominations&gt;</span>
+                    <span class="nt">&lt;DenominationValue&gt;</span>
+                        <span class="nt">&lt;UnitValue&gt;</span>20.0000<span class="nt">&lt;/UnitValue&gt;</span>
+                        <span class="nt">&lt;Count&gt;</span>8<span class="nt">&lt;/Count&gt;</span>
+                        <span class="nt">&lt;Currency&gt;</span>USD<span class="nt">&lt;/Currency&gt;</span>
+                    <span class="nt">&lt;/DenominationValue&gt;</span>
+                    <span class="nt">&lt;DenominationValue&gt;</span>
+                        <span class="nt">&lt;UnitValue&gt;</span>100.0000<span class="nt">&lt;/UnitValue&gt;</span>
+                        <span class="nt">&lt;Count&gt;</span>1<span class="nt">&lt;/Count&gt;</span>
+                        <span class="nt">&lt;Currency&gt;</span>USD<span class="nt">&lt;/Currency&gt;</span>
+                    <span class="nt">&lt;/DenominationValue&gt;</span>
+                <span class="nt">&lt;/Denominations&gt;</span>
+                <span class="nt">&lt;Register&gt;</span>0<span class="nt">&lt;/Register&gt;</span>
             <span class="nt">&lt;/CustomerTransaction&gt;</span>
         <span class="nt">&lt;/Transactions&gt;</span>
     <span class="nt">&lt;/Message&gt;</span>
@@ -697,7 +777,7 @@
 </tr>
 </tbody></table>
 <h1 id='audit-transactions'>Audit Transactions</h1>
-<p>Audit transactions are events that occur on the safe that don&#39;t directly have to do with cash being deposited into the safe.</p>
+<p>Audit transactions are events that occur on the safe that don&#39;t <em>directly</em> have to do with cash being deposited into the safe.</p>
 <h2 id='payload'>Payload</h2><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
     </span><span class="s2">"CustomerTransaction"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
         </span><span class="s2">"PickupGroupId"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
@@ -786,12 +866,14 @@
 <p><strong>Transaction Types</strong></p>
 
 <ul>
-<li>DoorOpened</li>
-<li>DoorClosed</li>
-<li>LockOpened</li>
-<li>LockClosed</li>
 <li>Login</li>
 <li>Logoff</li>
+<li>LockOpened</li>
+<li>LockClosed</li>
+<li>DoorOpened</li>
+<li>DoorClosed</li>
+<li>DoorWhine</li>
+<li>DoorWhineOverride</li>
 </ul>
 
       </div>
